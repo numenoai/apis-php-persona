@@ -1,8 +1,14 @@
-# OpenAPIClient-php
+# NumenoAPI-php
 
 ### Introduction
 
-Use the Numeno Persona API to create new personas.
+Use the Numeno Persona API to create and manage **Personas**.
+
+Evolving a Persona over time is dead-simple: [create a Persona](docs/Api/DefaultApi#createpersona), then send natural-language descriptions of your users’ in-app activities to the Persona API. Under the hood, we create a rich set of models of the system that evolve over time. Then, ask Numeno to personalize some part of your experience using the Persona. Numeno will use our models to tailor your software to each user’s unique preferences and habits, allowing you to dynamically adjust your offerings.
+
+For example, connect a Persona to the **[Numeno Article Recommender API](https://numeno.ai/wp-content/uploads/docs/artrec/numeno-article-recommender-api)** to generate **Article Feeds** that evolve over time as your Persona evloves with user interaction.
+
+Personas are not limited to modelling users. Posts in a social environment, articles or topics on a content platform, a screen or widget in your UI, a product in your inventory - groups of any of these things – Personas can evolve models of anything in your system! Get creative!
 
 For more information, please visit [https://numeno.ai/](https://numeno.ai/).
 
@@ -11,7 +17,6 @@ For more information, please visit [https://numeno.ai/](https://numeno.ai/).
 ### Requirements
 
 PHP 7.4 and later.
-Should also work with PHP 8.0.
 
 ### Composer
 
@@ -19,28 +24,14 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
 
 ```json
 {
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
-    }
-  ],
+  "minimum-stability": "dev",
   "require": {
-    "GIT_USER_ID/GIT_REPO_ID": "*@dev"
+    "numeno/api-persona": "dev-main"
   }
 }
 ```
 
 Then run `composer install`
-
-### Manual Installation
-
-Download the files and include `autoload.php`:
-
-```php
-<?php
-require_once('/path/to/OpenAPIClient-php/vendor/autoload.php');
-```
 
 ## Getting Started
 
@@ -64,10 +55,10 @@ $apiInstance = new NumenoPersona\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$persona_update = new \NumenoPersona\Model\PersonaUpdate(); // \NumenoPersona\Model\PersonaUpdate
+$persona_new = new \NumenoPersona\Model\PersonaNew(); // \NumenoPersona\Model\PersonaNew
 
 try {
-    $result = $apiInstance->createPersona($persona_update);
+    $result = $apiInstance->createPersona($persona_new);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->createPersona: ', $e->getMessage(), PHP_EOL;
@@ -79,14 +70,15 @@ try {
 
 All URIs are relative to *https://api.numeno.ai/persona*
 
-| Class        | Method                                                      | HTTP request                        | Description                  |
-| ------------ | ----------------------------------------------------------- | ----------------------------------- | ---------------------------- |
-| _DefaultApi_ | [**createPersona**](docs/Api/DefaultApi.md#createpersona)   | **POST** /v1/personas               | Create a new persona         |
-| _DefaultApi_ | [**deletePersona**](docs/Api/DefaultApi.md#deletepersona)   | **DELETE** /v1/personas/{personaId} | Delete a persona by ID       |
-| _DefaultApi_ | [**getPersonaById**](docs/Api/DefaultApi.md#getpersonabyid) | **GET** /v1/personas/{personaId}    | Get a specific persona by ID |
-| _DefaultApi_ | [**getPersonas**](docs/Api/DefaultApi.md#getpersonas)       | **GET** /v1/personas                | Get a list of all personas   |
-| _DefaultApi_ | [**healthCheck**](docs/Api/DefaultApi.md#healthcheck)       | **GET** /health                     | Check the health of the API  |
-| _DefaultApi_ | [**updatePersona**](docs/Api/DefaultApi.md#updatepersona)   | **PUT** /v1/personas/{personaId}    | Update a persona by ID       |
+| Class        | Method                                                      | HTTP request                 | Description                  |
+| ------------ | ----------------------------------------------------------- | ---------------------------- | ---------------------------- |
+| _DefaultApi_ | [**createPersona**](docs/Api/DefaultApi.md#createpersona)   | **POST** /v1/personas        | Create a new Persona         |
+| _DefaultApi_ | [**deletePersona**](docs/Api/DefaultApi.md#deletepersona)   | **DELETE** /v1/personas/{id} | Delete a Persona by ID       |
+| _DefaultApi_ | [**getPersonaById**](docs/Api/DefaultApi.md#getpersonabyid) | **GET** /v1/personas/{id}    | Get a specific Persona by ID |
+| _DefaultApi_ | [**getPersonas**](docs/Api/DefaultApi.md#getpersonas)       | **GET** /v1/personas         | Get a list of all Personas   |
+| _DefaultApi_ | [**getScopes**](docs/Api/DefaultApi.md#getscopes)           | **GET** /v1/scopes           | Get the Scopes for this API  |
+| _DefaultApi_ | [**healthCheck**](docs/Api/DefaultApi.md#healthcheck)       | **GET** /health              | Check the health of the API  |
+| _DefaultApi_ | [**updatePersona**](docs/Api/DefaultApi.md#updatepersona)   | **PUT** /v1/personas/{id}    | Update a Persona by ID       |
 
 ## Models
 
@@ -94,8 +86,10 @@ All URIs are relative to *https://api.numeno.ai/persona*
 - [ErrorResponse](docs/Model/ErrorResponse.md)
 - [HealthCheck](docs/Model/HealthCheck.md)
 - [Persona](docs/Model/Persona.md)
+- [PersonaList](docs/Model/PersonaList.md)
+- [PersonaNew](docs/Model/PersonaNew.md)
 - [PersonaUpdate](docs/Model/PersonaUpdate.md)
-- [Personas](docs/Model/Personas.md)
+- [Scopes](docs/Model/Scopes.md)
 
 ## Authorization
 
@@ -107,15 +101,6 @@ Authentication schemes defined for the API:
 - **API key parameter name**: X-Numeno-Key
 - **Location**: HTTP header
 
-## Tests
-
-To run the tests, use:
-
-```bash
-composer install
-vendor/bin/phpunit
-```
-
 ## Author
 
 support@numeno.ai
@@ -125,6 +110,6 @@ support@numeno.ai
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-  - Package version: `0.0.1`
-  - Generator version: `7.9.0`
+  - Package version: `0.0.3`
+  - Generator version: `7.10.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

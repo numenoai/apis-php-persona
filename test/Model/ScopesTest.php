@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorResponseTest
+ * ScopesTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace NumenoPersona\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ErrorResponseTest Class Doc Comment
+ * ScopesTest Class Doc Comment
  *
  * @category    Class
- * @description ErrorResponse
+ * @description Information about the Scopes supported by a service.
  * @package     NumenoPersona
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ErrorResponseTest extends TestCase
+class ScopesTest extends TestCase
 {
 
     /**
@@ -72,36 +72,18 @@ class ErrorResponseTest extends TestCase
     }
 
     /**
-     * Test "ErrorResponse"
+     * Test "Scopes"
      */
-    public function testErrorResponse()
+    public function testScopes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "status"
+     * Test attribute "scopes"
      */
-    public function testPropertyStatus()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "message"
-     */
-    public function testPropertyMessage()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "errors"
-     */
-    public function testPropertyErrors()
+    public function testPropertyScopes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

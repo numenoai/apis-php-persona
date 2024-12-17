@@ -1,4 +1,4 @@
-# # Personas
+# # PersonaList
 
 ## Properties
 
